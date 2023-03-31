@@ -10,5 +10,6 @@ namespace ASPNETMVCDEMO.Data
         }
 
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<JobExecutionHistory> JobExecutionHistory { get; set; }
     }
 }

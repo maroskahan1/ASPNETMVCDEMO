@@ -5,7 +5,21 @@
 
 <h1>Jobs</h1>
 
-<table class="table">
+@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.SuccessMessage
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.FailureMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.FailureMessage
+    </div>
+}
+
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Id</th>
@@ -13,6 +27,7 @@
             <th>Description</th>
             <th>Date of Last Start</th>
             <th>Interval</th>
+            <th>Operations</th>
         </tr>
     </thead>
     <tbody>
@@ -25,14 +40,16 @@
                 <td>
                 @if (job.DateOfLastStart != null)
                 {
-                    @job.DateOfLastStart.Value.ToString("dd-MM-yyyy HH:mm")
+                    @job.DateOfLastStart.Value.ToString("dd-MM-yyyy HH:mm:ss")
                 } else
                 {
                     @("Undefined")
                 }
                 </td>
                 <td>@job.Interval</td>
-                <td><a href="Job/View/@job.Id">View</a></td>
+                <td><a href="Job/View/@job.Id" class="btn btn-info">View</a>
+                <a href="Job/Start/@job.Id" class="btn btn-success">Start</a>
+                <a href="Job/History/@job.Id" class="btn btn-danger">History</a></td>
             </tr>
         }
     </tbody>

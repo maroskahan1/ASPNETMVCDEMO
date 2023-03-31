@@ -50,6 +50,46 @@ namespace ASPNETMVCDEMO.Migrations
 
                     b.ToTable("Jobs");
                 });
+
+            modelBuilder.Entity("ASPNETMVCDEMO.Models.Domain.JobExecutionHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExecutionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("JobId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Response")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Success")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobId");
+
+                    b.ToTable("JobExecutionHistory");
+                });
+
+            modelBuilder.Entity("ASPNETMVCDEMO.Models.Domain.JobExecutionHistory", b =>
+                {
+                    b.HasOne("ASPNETMVCDEMO.Models.Domain.Job", "Job")
+                        .WithMany()
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Job");
+                });
 #pragma warning restore 612, 618
         }
     }
