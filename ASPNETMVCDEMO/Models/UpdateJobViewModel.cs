@@ -1,6 +1,6 @@
-﻿namespace ASPNETMVCDEMO.Models.Domain
+﻿namespace ASPNETMVCDEMO.Models
 {
-    public class Job 
+    public class UpdateJobViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

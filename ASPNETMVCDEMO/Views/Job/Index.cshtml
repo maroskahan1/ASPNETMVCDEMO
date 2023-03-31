@@ -1,0 +1,39 @@
+﻿@model List<ASPNETMVCDEMO.Models.Domain.Job>
+
+@{
+}
+
+<h1>Jobs</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date of Last Start</th>
+            <th>Interval</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var job in Model)
+        {
+            <tr>
+                <td>@job.Id</td>
+                <td>@job.Name</td>
+                <td>@job.Description</td>
+                <td>
+                @if (job.DateOfLastStart != null)
+                {
+                    @job.DateOfLastStart.Value.ToString("dd-MM-yyyy HH:mm")
+                } else
+                {
+                    @("Undefined")
+                }
+                </td>
+                <td>@job.Interval</td>
+                <td><a href="Job/View/@job.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
